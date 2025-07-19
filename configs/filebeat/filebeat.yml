@@ -1,0 +1,14 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/app/access.log
+
+setup.template.name: "nginx-access-template"  
+setup.template.pattern: "nginx-access-filebeat-*"  
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  index: "nginx-access-filebeat-%{+yyyy.MM.dd}"
+  
+setup.ilm.enabled: false
